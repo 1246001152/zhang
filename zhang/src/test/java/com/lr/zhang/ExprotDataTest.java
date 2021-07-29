@@ -16,7 +16,7 @@ public class ExprotDataTest {
     public void simpleWrite() {
         // 有个很重要的点 DemoDataListener 不能被spring管理，要每次读取excel都要new,然后里面用到spring可以构造方法传进去
         // 写法1：
-        String fileName = "D:\\test\\car\\file\\text\\2021_06\\"+"simpleWrite" + System.currentTimeMillis() + ".xlsx";
+        String fileName = "D:\\test\\car\\file\\text\\2021_06\\" + "simpleWrite" + System.currentTimeMillis() + ".xlsx";
 //        String fileName = TestFileUtil.getPath() + "simpleWrite" + System.currentTimeMillis() + ".xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
         // 如果这里想使用03 则 传入excelType参数即可
@@ -25,12 +25,12 @@ public class ExprotDataTest {
     }
 
     private List data() {
-        List<DemoData> list  = new ArrayList<>();
+        List<DemoData> list = new ArrayList<>();
         DemoData demoData = new DemoData();
         for (int i = 0; i < 10; i++) {
             demoData.setDate(new DateTime().toString("yyyy-MM-dd"));
-            demoData.setStr("str1"+i);
-            demoData.setDoubleData("12"+i);
+            demoData.setStr("str1" + i);
+            demoData.setDoubleData("12" + i);
             list.add(demoData);
         }
         return list;
@@ -55,13 +55,14 @@ public class ExprotDataTest {
                 // 当然这里数据也可以用 List<List<String>> 去传入
                 .doWrite(data());
     }
+
     private List<List<String>> head() {
-        String[] arr = {"aaa","bbb","ccc"};
-        String[] tarr ={"bbb","ccc"};
+        String[] arr = {"aaa", "bbb", "ccc"};
+        String[] tarr = {"bbb", "ccc"};
         List<List<String>> list = new ArrayList<List<String>>();
         for (int i = 0; i < arr.length; i++) {
             List<String> head0 = new ArrayList<String>();
-            if(Arrays.asList(tarr).contains(arr[i])){
+            if (Arrays.asList(tarr).contains(arr[i])) {
                 setText(head0, "zzz");
             }
             setText(head0, arr[i]);
@@ -83,8 +84,8 @@ public class ExprotDataTest {
 
     private void setText(List<String> head0, String code) {
         HeaderEnum[] values = HeaderEnum.values();
-        for (HeaderEnum value:values) {
-            if(code.equals(value.getCode())){
+        for (HeaderEnum value : values) {
+            if (code.equals(value.getCode())) {
                 head0.add(value.getText());
             }
         }

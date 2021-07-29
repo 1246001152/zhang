@@ -24,14 +24,15 @@ public class ExpBudgetExcelDataListener extends AnalysisEventListener<ExpBudgetD
     private static final int BATCH_COUNT = 5;
 
     // 获取头信息
-    public static List<HeaderData> getHeaders(){
+    public static List<HeaderData> getHeaders() {
         return headerList;
     }
 
     // 获取头信息
-    public static List<ExpBudgetData> getDataList(){
+    public static List<ExpBudgetData> getDataList() {
         return dataList;
     }
+
     /**
      * 在转换异常 获取其他异常下会调用本接口。抛出异常则停止读取。如果这里不抛出异常则 继续读取下一行。
      *
@@ -45,7 +46,7 @@ public class ExpBudgetExcelDataListener extends AnalysisEventListener<ExpBudgetD
         // 如果是某一个单元格的转换异常 能获取到具体行号
         // 如果要获取头的信息 配合invokeHeadMap使用
         if (exception instanceof ExcelDataConvertException) {
-            ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException)exception;
+            ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException) exception;
             LOGGER.error("第{}行，第{}列解析异常", excelDataConvertException.getRowIndex(),
                     excelDataConvertException.getColumnIndex());
         }
@@ -53,62 +54,65 @@ public class ExpBudgetExcelDataListener extends AnalysisEventListener<ExpBudgetD
 
     /**
      * 这个每一条数据解析都会来调用
+     *
      * @param data
      * @param context
      */
     @Override
     public void invoke(ExpBudgetData data, AnalysisContext context) {
 //        LOGGER.info("解析到一条数据:{}", JSON.toJSONString(data));
-          dataList.add(data);
+        dataList.add(data);
     }
+
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
-        String[] headerCodeArr = {"proCode","proType","proName","expStartBgt"};
-            if(rowIndex.get()==0){
-                getHeader(headerCodeArr, headMap);
-            }else{
-                for (int i = 0; i < 4; i++) {
-                    String head = headMap.get(i);
-                    HeaderData headerData = headerList.get(i);
-                    setChildren(head, headerCodeArr,i,headerData);
-                }
+        String[] headerCodeArr = {"proCode", "proType", "proName", "expStartBgt"};
+        if (rowIndex.get() == 0) {
+            getHeader(headerCodeArr, headMap);
+        } else {
+            for (int i = 0; i < 4; i++) {
+                String head = headMap.get(i);
+                HeaderData headerData = headerList.get(i);
+                setChildren(head, headerCodeArr, i, headerData);
             }
+        }
         rowIndex.getAndIncrement();
     }
-    private void setChildren(String head, String[] headerCodeArr,int i, HeaderData headerData) {
-        if(headerData.getLabel() !=null ){
-            if(head!=null){
-                HeaderData header =  new HeaderData();
+
+    private void setChildren(String head, String[] headerCodeArr, int i, HeaderData headerData) {
+        if (headerData.getLabel() != null) {
+            if (head != null) {
+                HeaderData header = new HeaderData();
                 header.setId(UUID.randomUUID().toString());
                 header.setLabel(head);
                 header.setProp(headerCodeArr[i]);
                 headerData.setProp(null);
                 List<HeaderData> children = headerData.getChildren();
-                if(children==null){
-                    children= new ArrayList<>();
+                if (children == null) {
+                    children = new ArrayList<>();
                 }
                 children.add(header);
                 headerData.setChildren(children);
                 return;
             }
-        }else{
+        } else {
             int temp = i - 1;
-            if(temp>0){
+            if (temp > 0) {
                 headerData = headerList.get(temp);
-                setChildren(head, headerCodeArr,i,headerData);
+                setChildren(head, headerCodeArr, i, headerData);
             }
         }
     }
 
-    private void getHeader(String[] headerCodeArr,Map<Integer, String> headMap) {
+    private void getHeader(String[] headerCodeArr, Map<Integer, String> headMap) {
         for (int i = 0; i < 4; i++) {
-            if(headMap.get(i) !=null){
-                HeaderData header =  new HeaderData();
+            if (headMap.get(i) != null) {
+                HeaderData header = new HeaderData();
                 header.setId(UUID.randomUUID().toString());
-                header.setLabel(headMap.get(i) );
+                header.setLabel(headMap.get(i));
                 header.setProp(headerCodeArr[i]);
                 headerList.add(header);
-            }else{
+            } else {
                 headerList.add(new HeaderData());
             }
         }
@@ -117,6 +121,7 @@ public class ExpBudgetExcelDataListener extends AnalysisEventListener<ExpBudgetD
 
     /**
      * 所有数据解析完成了 都会来调用
+     *
      * @param context
      */
     @Override

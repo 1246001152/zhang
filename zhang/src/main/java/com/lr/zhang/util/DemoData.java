@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class DemoData {
-    @ExcelProperty({"aaa","字符串标题"})
+    @ExcelProperty({"aaa", "字符串标题"})
     private String str;
-    @ExcelProperty({"aaa","bbbb","日期标题"})
+    @ExcelProperty({"aaa", "bbbb", "日期标题"})
     private String date;
-    @ExcelProperty({"aaa","bbbb","数字标题"})
+    @ExcelProperty({"aaa", "bbbb", "数字标题"})
     private String doubleData;
     /**
      * 忽略这个字段

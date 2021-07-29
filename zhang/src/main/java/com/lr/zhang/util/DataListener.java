@@ -19,15 +19,18 @@ public class DataListener extends AnalysisEventListener<DemoData> {
      * 每隔5条存储数据库，实际使用中可以3000条，然后清理list ，方便内存回收
      */
     private static final int BATCH_COUNT = 5;
-    public static List<Map<Integer, String>> getHeaders(){
+
+    public static List<Map<Integer, String>> getHeaders() {
         return mapList;
     }
-    public static List<DemoData>  getResults(){
+
+    public static List<DemoData> getResults() {
         return list;
     }
 
     /**
      * 这个每一条数据解析都会来调用
+     *
      * @param data
      * @param context
      */
@@ -36,6 +39,7 @@ public class DataListener extends AnalysisEventListener<DemoData> {
         LOGGER.info("解析到一条数据:{}", JSON.toJSONString(data));
         list.add(data);
     }
+
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
         LOGGER.info("解析到一条头数据:{}", JSON.toJSONString(headMap));

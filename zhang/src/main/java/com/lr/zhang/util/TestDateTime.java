@@ -19,9 +19,7 @@ public class TestDateTime {
         int year = dateTime3.getYear();
         int month = dateTime3.getMonthOfYear();
         int day = dateTime3.getDayOfMonth();
-        System.out.println(year + " == " + month + " == " + day ); //out : 2021 == 6 == 22
-
-
+        System.out.println(year + " == " + month + " == " + day); //out : 2021 == 6 == 22
 
 
     }

@@ -54,16 +54,16 @@ public class EasyExcelTest {
 
     }
 
-    public static XSSFWorkbook createWorkbook(String filePath){
-        if(filePath==null){
+    public static XSSFWorkbook createWorkbook(String filePath) {
+        if (filePath == null) {
             return null;
         }
         String extString = filePath.substring(filePath.lastIndexOf("."));
-        try (InputStream is = new FileInputStream(filePath)){
-            System.out.println("filePath====>>>>>"+filePath);
-            if(".xls".equals(extString)){
+        try (InputStream is = new FileInputStream(filePath)) {
+            System.out.println("filePath====>>>>>" + filePath);
+            if (".xls".equals(extString)) {
                 return new XSSFWorkbook(is);
-            }else if(".xlsx".equals(extString)){
+            } else if (".xlsx".equals(extString)) {
                 return new XSSFWorkbook(is);
             }
         } catch (Exception e) {

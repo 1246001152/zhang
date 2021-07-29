@@ -27,6 +27,7 @@ public class JsoupUtils {
 
     /**
      * String content
+     *
      * @return
      */
     public static String jsoupElementByURL() {
@@ -42,7 +43,7 @@ public class JsoupUtils {
         Elements es = body.select("a");
         for (Iterator it = es.iterator(); it.hasNext(); ) {
             Element e = (Element) it.next();
-            System.out.println(e.text()+" "+e.attr("href"));
+            System.out.println(e.text() + " " + e.attr("href"));
         }
         Elements jsScript = body.select("script");
         Elements form = body.select("form");

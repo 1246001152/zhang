@@ -4,7 +4,7 @@ import java.util.List;
 
 public class HeaderData {
 
-    private String id ;
+    private String id;
     // 表头
     private String label;
     // 字段名
