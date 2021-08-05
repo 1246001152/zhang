@@ -66,7 +66,7 @@ public class Crawing {
         JSONArray JsonArr = JSON.parseArray(s);
         JSONArray guids = JsonArr.getJSONObject(0).getJSONArray("guids");
 
-        File file = new File("项目详情json.json");
+       File file = new File("项目详情json.json");
         if (!file.exists())//判断文件是否存在，若不存在则新建
         {
             file.createNewFile();
@@ -134,13 +134,14 @@ public class Crawing {
         // post
         String url2 = "http://10.120.93.131:7001/pdm/prodetail/detailinfo/detailinfo_prodetailService.rcp?" + System.currentTimeMillis() + "&tokenid=" + tokenid + "&year=2021";
         jse.executeScript(String.format(script2, url2));
-//        Thread.sleep(1000); // ==========
+        Thread.sleep(1000); //===== =====
         WebElement text2 = driver.findElement(new By.ByXPath("/html"));
 //        System.out.println(text2.getText());
 
         JSONObject jsonObject2 = JSONObject.parseObject(text2.getText());
-//            System.err.println(jsonObject2);
-//==========================================
+
+        Thread.sleep(1000); //===== =====
+        ///////////////////////////////////////
         String script1 = "const input1 = document.createElement('input');\n" +
                 "input1.name='serverid'; input1.value='buscommon.ui.editform';\n" +
                 "const input2 = document.createElement('input');\n" +
@@ -160,16 +161,16 @@ public class Crawing {
         // post
         String url1 = "http://10.120.93.131:7001/pdm/prodetail/detailinfo/webservice.rcp?" + System.currentTimeMillis() + "&tokenid=" + tokenid + "&year=2021";
         jse.executeScript(String.format(script1, url1));
-//        Thread.sleep(1000); // ======
+        Thread.sleep(1000); //===== =====
         WebElement text1 = driver.findElement(new By.ByXPath("/html"));
 //        System.out.println(text1.getText());
 
         JSONObject jsonObject1 = JSONObject.parseObject(text1.getText());
-//            System.err.println(jsonObject1);
-//        Thread.sleep(1000); // =====
+
+
+        Thread.sleep(1000); //===== =====
         ///////////////////////////////////////
 
-//        System.out.println("====================================================");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("一级项目编码名称", jsonObject1.get("projectkind"));
         jsonObject.put("二级项目编码名称", jsonObject1.get("promaincode"));

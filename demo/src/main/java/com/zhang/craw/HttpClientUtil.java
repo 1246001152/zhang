@@ -6,7 +6,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("deprecation")
@@ -37,13 +36,13 @@ public class HttpClientUtil {
         }
     }
 
-    public static void main(String[] args) {
-        String API_URL = "http://10.120.93.131:7001/pdm/prodetail/detailinfo/webservice.rcp?1626251442302&tokenid=3C547F4BB740AF1C91035697F7C42DC98fe91ee4&year=2021";
-        //post的参数需要urlencode，由于httpclient组件里使用了UrlEncodedFormEntity组织参数，所以此处不能编码
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("tokenid", "app_id");
-        parameters.put("year", "2021");
-        String strResult = HttpClientUtil.post(API_URL, parameters);
-        System.out.println(strResult);
-    }
+//    public static void main(String[] args) {
+//        String API_URL = "http://10.120.93.131:7001/pdm/prodetail/detailinfo/webservice.rcp?1626251442302&tokenid=3C547F4BB740AF1C91035697F7C42DC98fe91ee4&year=2021";
+//        //post的参数需要urlencode，由于httpclient组件里使用了UrlEncodedFormEntity组织参数，所以此处不能编码
+//        Map<String, String> parameters = new HashMap<>();
+//        parameters.put("tokenid", "app_id");
+//        parameters.put("year", "2021");
+//        String strResult = HttpClientUtil.post(API_URL, parameters);
+//        System.out.println(strResult);
+//    }
 }

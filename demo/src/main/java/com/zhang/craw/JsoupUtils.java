@@ -56,7 +56,7 @@ public class JsoupUtils {
         return "";
     }
 
-    public static void main(String[] args) {
-        jsoupElementByURL();
-    }
+//    public static void main(String[] args) {
+//        jsoupElementByURL();
+//    }
 }
